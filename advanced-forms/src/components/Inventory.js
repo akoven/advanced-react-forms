@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import Selections from './Selections';
+import { useInventoryContext } from '../contexts/InventoryProvider';
+import { useHistory } from 'react-router-dom';
 
 const Invetory = () => {
+    const {setValues} = useInventoryContext();
+    const history = useHistory();
+
     const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
     const [value3, setValue3] = useState('');
@@ -20,9 +25,30 @@ const Invetory = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-    }
+        const result = [
+            value1,
+            value2,
+            value3,
+            value4,
+            value5,
+            value6,
+            value7,
+            value8,
+            value9,
+            value10,
+            value11,
+            value12,
+            value13,
+            value14,
+            value15
+        ];
+
+        setValues(result);
+        history.push('/report');
+    };
+
     return(
-        <form onSubmit={handleSubmit()}>
+        <form onSubmit={handleSubmit}>
             <div><h2>Inventory Assessment</h2></div>
             <div>
                 <p>I learn the most when the lesson engages my sense of <em>sight</em></p>
