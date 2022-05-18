@@ -1,62 +1,72 @@
-import React, {useState} from 'react';
-import Selections from './Selections';
-import { useInventoryContext } from '../contexts/InventoryProvider';
-import { useHistory } from 'react-router-dom';
+// import React, {useState} from 'react';
+// import Selections from './Selections';
+// import { useInventoryContext } from '../contexts/InventoryProvider';
+// import { useHistory } from 'react-router-dom';
+import InventoryQuestions from './InventoryQuestions';
+import data from '../mockdata/spi.json';
 
 const Invetory = () => {
-    const {setValues} = useInventoryContext();
-    const history = useHistory();
+    // const {setValues} = useInventoryContext();
+    // const history = useHistory();
 
-    const [value1, setValue1] = useState('');
-    const [value2, setValue2] = useState('');
-    const [value3, setValue3] = useState('');
-    const [value4, setValue4] = useState('');
-    const [value5, setValue5] = useState('');
-    const [value6, setValue6] = useState('');
-    const [value7, setValue7] = useState('');
-    const [value8, setValue8] = useState('');
-    const [value9, setValue9] = useState('');
-    const [value10, setValue10] = useState('');
-    const [value11, setValue11] = useState('');
-    const [value12, setValue12] = useState('');
-    const [value13, setValue13] = useState('');
-    const [value14, setValue14] = useState('');
-    const [value15, setValue15] = useState('');
+    // const [value1, setValue1] = useState('');
+    // const [value2, setValue2] = useState('');
+    // const [value3, setValue3] = useState('');
+    // const [value4, setValue4] = useState('');
+    // const [value5, setValue5] = useState('');
+    // const [value6, setValue6] = useState('');
+    // const [value7, setValue7] = useState('');
+    // const [value8, setValue8] = useState('');
+    // const [value9, setValue9] = useState('');
+    // const [value10, setValue10] = useState('');
+    // const [value11, setValue11] = useState('');
+    // const [value12, setValue12] = useState('');
+    // const [value13, setValue13] = useState('');
+    // const [value14, setValue14] = useState('');
+    // const [value15, setValue15] = useState('');
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        const result = [
-            value1,
-            value2,
-            value3,
-            value4,
-            value5,
-            value6,
-            value7,
-            value8,
-            value9,
-            value10,
-            value11,
-            value12,
-            value13,
-            value14,
-            value15
-        ];
+    // const handleSubmit = e => {
+    //     e.preventDefault();
+    //     const result = [
+    //         value1,
+    //         value2,
+    //         value3,
+    //         value4,
+    //         value5,
+    //         value6,
+    //         value7,
+    //         value8,
+    //         value9,
+    //         value10,
+    //         value11,
+    //         value12,
+    //         value13,
+    //         value14,
+    //         value15
+    //     ];
 
-        setValues(result);
-        history.push('/report');
-    };
+    //     setValues(result);
+    //     history.push('/report');
+    // };
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form>
             <div><h2>Inventory Assessment</h2></div>
             <div>
-                <p>I learn the most when the lesson engages my sense of <em>sight</em></p>
-                <select name='q1' onChange={(e) => setValue1(e.target.value)} value={value1}>
-                <Selections />
-                </select>
+                {data.questions.map(question =>{
+                    if(question.type === 'section'){
+                        return(
+                            <h3>{question.instructions}</h3>
+                        )
+                    }else{
+                        return(
+                            <InventoryQuestions name={question.code} stem={question.stem} onChange={(value) => console.log('change question', question.code, value)}/>
+                        )
+                    };
+                }
+                )}
 
-                <p>I learn the most when the lesson engages my sense of <em>hearing</em></p>
+                {/* <p>I learn the most when the lesson engages my sense of <em>hearing</em></p>
                 <select name='q2'onChange={(e) => setValue2(e.target.value)} value={value2}>
                 <Selections />
                 </select>
@@ -111,9 +121,12 @@ const Invetory = () => {
                 <p>When I get a new device, I usually try a hands-on approach to figure out how to operate it</p>
                 <select name='q15' onChange={(e) => setValue15(e.target.value)} value={value15}>
                 <Selections />
-                </select>
-                <div className='submitButton'>
+                </select> */}
+                {/* <div className='submitButton'>
                     <button type='submit' disabled={!value1 || !value2 || !value3 || !value4 || !value5 || !value6 || !value7 || !value8 || !value9 || !value10 || !value11 || !value12 || !value13 || !value14 || !value15}>Submit!</button>
+                </div> */}
+                <div className='submitButton'>
+                    <button type='submit' disabled>Next</button>
                 </div>
             </div>
         </form>
